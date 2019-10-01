@@ -1,0 +1,17 @@
+body {
+  background: url("../images/body-background-4.jpg");
+  background-size: cover;
+}
+
+.viewport-container {
+  width: 1050px;
+  height: 525px;
+  border: 3px solid black;
+  margin: 150px auto;
+}
+
+#viewport {
+  background: url("../images/game-background.png");
+  background-size: cover;
+}
+
