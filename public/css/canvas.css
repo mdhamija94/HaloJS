@@ -1,17 +1,50 @@
 body {
-  background: url("../images/body-background-4.jpg");
+  background: url("../images/body-background-10.jpg");
   background-size: cover;
+}
+
+.title-container {
+  width: 500px;
+  height: 75px;
+  background: url("../images/halo-png-44130.png");
+  background-size: cover;
+  margin: 37.5px auto;
+  color: white;
+}
+
+.dot-js {
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 485px;
+  font-family: 'Audiowide', cursive;
+  font-size: 24px;
+  letter-spacing: 3px;
+}
+
+.subtitle {
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 140px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .viewport-container {
   width: 1050px;
-  height: 525px;
+  height: 515px;
   border: 3px solid black;
-  margin: 150px auto;
+  margin: 50px auto 150px;
 }
 
 #viewport {
   background: url("../images/game-background.png");
+  /* background: white; */
+  /* opacity: 0.5; */
   background-size: cover;
 }
 

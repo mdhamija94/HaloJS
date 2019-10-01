@@ -86,14 +86,27 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/flood.js":
+/*!**********************!*\
+  !*** ./src/flood.js ***!
+  \**********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nclass Flood {\n  constructor(options) {\n    this.x = options.x;\n    this.y = options.y;\n    this.dx = 2;\n    this.dy = 0;\n    this.vel = options.vel;\n    this.radius = options.radius;\n    this.color = options.color;\n  }\n\n  draw(ctx) {\n    ctx.fillStyle = this.color;\n    ctx.arc(this.x, this.y, this.radius, 0, 2.0 * Math.PI);\n    ctx.fill();\n  }\n\n  move() {\n    this.x += this.dx;\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Flood);\n\n//# sourceURL=webpack:///./src/flood.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("\n\n//# sourceURL=webpack:///./src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _flood__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./flood */ \"./src/flood.js\");\n\n\nwindow.Flood = _flood__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  const canvas = document.getElementById(\"viewport\");\n\n  const ctx = canvas.getContext(\"2d\");\n\n  const mo = new _flood__WEBPACK_IMPORTED_MODULE_0__[\"default\"]({\n    x: 30,\n    y: 350,\n    vel: [10, 10],\n    radius: 10,\n    color: \"#00FF00\"\n  });\n\n  mo.draw(ctx);\n\n  // const playerImg = new Image();\n  // playerImg.src = \"../public/images/MasterChief.png\";\n\n  // this.ctx.drawImage()\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
