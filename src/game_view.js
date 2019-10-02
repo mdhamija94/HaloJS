@@ -16,7 +16,7 @@ class GameView {
     let delta = now - this.then;
 
     if (delta > interval) {
-      this.game.step(delta)
+      this.game.step(delta);
       this.game.draw(this.ctx);
       this.then = now;
     }

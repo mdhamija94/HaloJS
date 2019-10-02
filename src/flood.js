@@ -54,13 +54,18 @@ class Flood {
       ctx.fill();
   }
 
-  move() {
+  animateFlood() {
+    this.converge();
     this.x += this.dx;
     this.y += this.dy;
-    this.animateFlood();
-    this.animateAttack();
-    this.converge();
-
+    if (this.shiftSX === 648) {
+      this.shiftSX = 710;
+    } else if (this.shiftSX === 710) {
+      this.shiftSX = 648;
+    } 
+    // else if (this.shiftSX === 783) {
+    //   this.shiftSX = 648;
+    // }
 
     // if (this.shiftSW === 60) {
     //   this.shiftSW = 74;
@@ -77,39 +82,16 @@ class Flood {
     // this.shift
   }
 
-  animateFlood() {
-    if (this.x < 750) {
-      if (this.shiftSX === 648) {
-        this.shiftSX = 710;
-      } else if (this.shiftSX === 710) {
-        this.shiftSX = 648;
+  converge() {
+    if (this.x >= 500) {
+      if (this.y < 260) {
+        this.dy = 7.5;
+      } else if (this.y > 260) {
+        this.dy = -7.5;
+      } else {
+        this.dy = 0;
       }
     }
-    // else if (this.shiftSX === 783) {
-    //   this.shiftSX = 648;
-    // }
-  }
-
-  animateAttack() {
-    if (this.x >= 750) {
-      if (this.shiftSX === 648 || this.shiftSX === 710) {
-        this.shiftSX === 783;
-      } else {
-        this.shiftSX === 710;
-      }
-    } 
-  }
-
-  converge() {
-    // if (this.x >= 500) {
-    //   if (this.y < 260) {
-    //     this.dy = 7.5;
-    //   } else if (this.y > 260) {
-    //     this.dy = -7.5;
-    //   } else {
-    //     this.dy = 0;
-    //   }
-    // }
 
     if (this.x >= 750) {
       this.dx = 0;

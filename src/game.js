@@ -48,7 +48,7 @@ class Game {
 
   moveFlood() {
     this.flood.forEach(object => {
-      object.move();
+      object.animateFlood();
     });
   }
 
