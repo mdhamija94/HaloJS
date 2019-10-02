@@ -93,7 +93,7 @@ class Dictionary {
       'unfair', 'urge', 'use', 'useful', 'unlike', 'undress', 'union', 'user', 
       'utter', 'unaware', 'uniform', 'uncle', 'unity', 'upset', 'vein', 'virus', 
       'voyage', 'view', 'volcano', 'vessel', 'virtue', 'vote', 'vacuum', 'village', 
-      'visual', 'Venus', 'valley', 'vision', 'velvet', 'virgin', 'vehicle', 'voice', 
+      'visual', 'valley', 'vision', 'velvet', 'vehicle', 'voice', 'programmer',
       'valid', 'vain', 'vat', 'venture', 'value', 'voucher', 'video', 'variable', 
       'variant', 'veil', 'voter', 'wood', 'wind', 'want', 'way', 'waste', 
       'welfare', 'waiter', 'wrist', 'wild', 'winter', 'weigh', 'wine', 'wound', 
@@ -105,6 +105,11 @@ class Dictionary {
       'spartan', 'scarab', 'terminal', 'bungie', 'reach', 'heroic', 'legendary', 
       'skull', 'recon', 'heretic', 'forerunner', 'jackal'
     ];
+  }
+
+  randomWord() {
+    const randomIdx = Math.floor(this.words.length * Math.random());
+    return this.words[randomIdx];
   }
 }
 

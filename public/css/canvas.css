@@ -1,3 +1,5 @@
+@import "./reset.css";
+
 body {
   background: url("../images/body-background-10.jpg");
   background-size: cover;
@@ -8,7 +10,7 @@ body {
   height: 75px;
   background: url("../images/halo-png-44130.png");
   background-size: cover;
-  margin: 37.5px auto;
+  margin: 32.5px auto;
   color: white;
 }
 
@@ -37,14 +39,47 @@ body {
 .viewport-container {
   width: 1050px;
   height: 515px;
-  border: 3px solid black;
-  margin: 50px auto 150px;
+  border: 1px solid white;
+  margin: auto;
+  position: absolute;
+  top: calc((100vh - 515px) / 2);
+  left: calc((100vw - 1050px) / 2);
 }
 
 #viewport {
   background: url("../images/game-background.png");
-  /* background: white; */
-  /* opacity: 0.5; */
+  /* background: white;
+  opacity: 0.5; */
   background-size: cover;
 }
 
+.footer-container {
+  width: 100%;
+  color: white;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.footer-list {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px 0px;
+}
+
+.footer-icon-container {
+  width: 50px;
+  height: 50px;
+  border: 1px solid white;
+}
+
+.footer-icon-container:hover {
+  color: black;
+  background-color: white;
+}
+
+.footer-icon-container a i {
+  display: flex;
+  font-size: 25px;
+  padding: 13.75px;
+}
