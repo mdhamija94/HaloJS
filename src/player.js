@@ -1,7 +1,7 @@
 class Player {
   constructor() {
-    this.radius = 10;
-    this.color = "red";
+    this.lives = 5;
+    this.score = 0;
     this.attack = false;
 
     this.playerImg = new Image();

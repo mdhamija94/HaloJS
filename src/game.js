@@ -5,15 +5,14 @@ import Player from './player';
 
 class Game {
   constructor(ctx, input) {
-    this.flood = [];
-    // this.player = [];
     this.ctx = ctx;
     this.input = input;
     this.dictionary = new Dictionary();
-
-    this.spawnFlood();
-    this.spawnPlayer();
+    this.player = new Player();
+    this.flood = [];
+    
     this.draw(this.ctx);
+    this.spawnFlood();
 
     this.handleInput = this.handleInput.bind(this);
   }
@@ -29,26 +28,23 @@ class Game {
     }
   }
 
-  spawnPlayer() {
-    this.player = new Player();
-  }
-
-  handleInput(e) {
+  handleInput(e) {    
     if (e.keyCode === 13) {
-      debugger
       this.player.attack = !this.player.attack;
-      debugger
+
       let value = this.input.value;
-      this.flood.forEach(floodObj => {
+      this.flood.forEach((floodObj, idx) => {
+        if (floodObj.y > 250 && floodObj.y < 270) {
+          floodObj.x -= 15;
+        }
+        
         if (value === floodObj.word) {
-          floodObj.word = "";
-          floodObj.dx = 0;
-          floodObj.dy = 0;
+          this.flood.splice(idx, 1);
+          // floodObj.drawDead();
         }
       });
       this.input.value = "";
     }
-    // this.player.attack = false;
   }
   
 
@@ -58,16 +54,13 @@ class Game {
 
   draw(ctx) {
     ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
-    
     this.player.draw(ctx);
+    this.player.attack = false;
 
     this.flood.forEach(object => {
+      object.drawWord(ctx);
       object.draw(ctx);
-      // if (object instanceof Flood) {
-        object.drawWord(ctx);
-      // }
     });
-
   }
 
   moveFlood() {

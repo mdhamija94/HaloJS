@@ -20,9 +20,6 @@ class GameView {
       this.game.draw(this.ctx);
       this.then = now;
     }
-    
-    // debugger
-    //   // this.game.moveFlood();
 
     this.game.input.addEventListener('keydown', this.game.handleInput);
 
