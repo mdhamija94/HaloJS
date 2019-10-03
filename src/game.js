@@ -18,7 +18,7 @@ class Game {
   }
   
   spawnFlood() {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 15; i++) {
       let floodObj = new Flood({
         x: -100,
         y: Util.randomY(),
@@ -33,13 +33,20 @@ class Game {
       this.player.attack = !this.player.attack;
 
       let value = this.input.value;
-      this.flood.forEach((floodObj, idx) => {
+      this.flood.forEach(floodObj => {
         if (floodObj.y > 250 && floodObj.y < 270) {
           floodObj.x -= 15;
+          floodObj.y += Util.randomDY();
         }
         
         if (value === floodObj.word) {
-          this.flood.splice(idx, 1);
+          // this.flood.splice(idx, 1);
+          this.player.score += (floodObj.word.length * 10);
+          floodObj.word = "";
+          floodObj.alive = false;
+          floodObj.dx = 0;
+          floodObj.dy = 0;
+          debugger
           // floodObj.drawDead();
         }
       });
@@ -55,12 +62,16 @@ class Game {
   draw(ctx) {
     ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
     this.player.draw(ctx);
-    this.player.attack = false;
 
     this.flood.forEach(object => {
-      object.drawWord(ctx);
       object.draw(ctx);
+      object.drawWord(ctx);
     });
+
+    this.player.drawInput(ctx);
+    this.player.drawScore(ctx);
+    this.player.drawLives(ctx);
+    this.player.attack = false;
   }
 
   moveFlood() {

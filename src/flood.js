@@ -52,6 +52,10 @@ class Flood {
       ctx.fill();
   }
 
+  drawDead(ctx) {
+
+  }
+
   bindPath() {
     if (this.x <= 500) {
       if (this.y < 165 || this.y > 450) {
@@ -73,7 +77,7 @@ class Flood {
 
     if (this.x >= 750) {
       this.dx = 0;
-    } else if (this.x < 750) {
+    } else if (this.x < 750 && this.alive) {
       this.dx = 8;
     }
   }
@@ -89,6 +93,10 @@ class Flood {
     } else if (this.shiftSX === 710) {
       this.shiftSX = 648;
     }
+  }
+
+  detonateFlood() {
+
   }
 }
 
