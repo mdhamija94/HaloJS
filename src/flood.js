@@ -3,7 +3,7 @@ class Flood {
     this.x = options.x;
     this.y = options.y;
     this.word = options.word;
-    this.dx = 10;
+    this.dx = 8;
     this.dy = 0;
     this.shiftSX = 648;
     this.shiftSW = 60;
@@ -49,8 +49,8 @@ class Flood {
   drawWord(ctx) {
     ctx.beginPath();
       ctx.fillStyle = "white";
-      ctx.fillText(this.word, this.x + 10, this.y - 10);
-      ctx.font = '18px "Arial"';
+      ctx.fillText(this.word, this.x + 7.5, this.y - 10);
+      ctx.font = '20px "Audiowide"';
       ctx.fill();
   }
 

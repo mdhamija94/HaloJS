@@ -4,19 +4,22 @@ import Flood from './flood';
 import Player from './player';
 
 class Game {
-  constructor(ctx) {
+  constructor(ctx, input) {
     this.flood = [];
-    this.player = [];
+    // this.player = [];
     this.ctx = ctx;
-    this.dictionary = new Dictionary()
+    this.input = input;
+    this.dictionary = new Dictionary();
 
     this.spawnFlood();
     this.spawnPlayer();
     this.draw(this.ctx);
+
+    this.handleInput = this.handleInput.bind(this);
   }
   
   spawnFlood() {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
       let floodObj = new Flood({
         x: -100,
         y: Util.randomY(),
@@ -27,23 +30,44 @@ class Game {
   }
 
   spawnPlayer() {
-    let playerObj = new Player();
-    this.player.push(playerObj);
+    this.player = new Player();
   }
 
-  allObjects() {
-    return this.player.concat(this.flood);
+  handleInput(e) {
+    if (e.keyCode === 13) {
+      debugger
+      this.player.attack = !this.player.attack;
+      debugger
+      let value = this.input.value;
+      this.flood.forEach(floodObj => {
+        if (value === floodObj.word) {
+          floodObj.word = "";
+          floodObj.dx = 0;
+          floodObj.dy = 0;
+        }
+      });
+      this.input.value = "";
+    }
+    // this.player.attack = false;
   }
+  
+
+  // allObjects() {
+  //   return this.player.concat(this.flood);
+  // }
 
   draw(ctx) {
     ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
+    
+    this.player.draw(ctx);
 
-    this.allObjects().forEach(object => {
+    this.flood.forEach(object => {
       object.draw(ctx);
-      if (object instanceof Flood) {
+      // if (object instanceof Flood) {
         object.drawWord(ctx);
-      }
+      // }
     });
+
   }
 
   moveFlood() {

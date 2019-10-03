@@ -10,7 +10,7 @@ class GameView {
   }
 
   animate() {
-    let fps = 10;
+    let fps = 8;
     let interval = 1000 / fps;
     let now = Date.now();
     let delta = now - this.then;
@@ -21,9 +21,10 @@ class GameView {
       this.then = now;
     }
     
+    // debugger
     //   // this.game.moveFlood();
 
-    
+    this.game.input.addEventListener('keydown', this.game.handleInput);
 
     requestAnimationFrame(this.animate.bind(this));
   }

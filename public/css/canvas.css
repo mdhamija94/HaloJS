@@ -42,7 +42,7 @@ body {
   border: 1px solid white;
   margin: auto;
   position: absolute;
-  top: calc((100vh - 515px) / 2);
+  top: calc((100vh - 500px) / 2);
   left: calc((100vw - 1050px) / 2);
 }
 
@@ -51,6 +51,20 @@ body {
   /* background: white;
   opacity: 0.5; */
   background-size: cover;
+}
+
+#typebox {
+  position: absolute;
+  bottom: 25px;
+  left: 390px;
+  background-color: rgba(141, 248, 253, 0.3);
+  /* background-color: red; */
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  color: white;
 }
 
 .footer-container {
