@@ -9,24 +9,34 @@ class Game {
     this.input = input;
     this.dictionary = new Dictionary();
     this.player = new Player();
+    // this.round = 1;
+    this.spawnGap = 2750;
+    this.killCount = 0;
     this.flood = [];
     
     this.draw(this.ctx);
-    this.spawnFlood();
+    // this.incrementRound();
+    this.interval = setInterval(() => this.spawnFlood(), 3000);
 
     this.handleInput = this.handleInput.bind(this);
     this.handleDamage = this.handleDamage.bind(this);
   }
+
+  floodFactory() {
+    let floodObj = new Flood({
+      x: -100,
+      y: Util.randomY(),
+      word: this.dictionary.randomWord()
+    });
+    
+    this.flood.push(floodObj);
+  }
   
   spawnFlood() {
-    for (let i = 0; i < 1; i++) {
-      let floodObj = new Flood({
-        x: -100,
-        y: Util.randomY(),
-        word: this.dictionary.randomWord()
-      });
-
-      this.flood.push(floodObj);
+    const num = (this.killCount % 2 === 0) ? 1 : 2;
+    
+    for (let i = 0; i < num; i++) {
+      this.floodFactory();
     }
   }
 
@@ -42,12 +52,15 @@ class Game {
           floodObj.y += Util.randomDY();
         }
         
-        if (value === floodObj.word) {
-          this.player.score += (floodObj.word.length * 10);
+        if (value === floodObj.word && value !== "") {
+          // this.player.score += (floodObj.word.length * 10);
+          this.player.score += 1;
           floodObj.alive = false;
+          this.killCount += 1;
+          this.incrementRound();
         }
       });
-
+      
       this.input.value = "";
     }
   }
@@ -84,11 +97,20 @@ class Game {
   }
 
   moveFlood() {
-    debugger
     this.flood.forEach(object => {
       object.animateFlood();
       object.detonateFlood();
     });
+  }
+
+  incrementRound() {
+    if (this.killCount % 5 === 0 && this.spawnGap > 1250) {
+      debugger
+      // this.round += 1;
+      clearInterval(this.interval);
+      this.interval = setInterval(() => this.spawnFlood(), this.spawnGap);
+      this.spawnGap -= 250;
+    }
   }
 
   // checkPlayer() {
@@ -99,6 +121,7 @@ class Game {
     this.moveFlood();
     // this.checkPlayer();
     this.handleDamage();
+    // this.incrementRound();
   }
 }
 

@@ -59,28 +59,31 @@ class Player {
 
   drawScore(ctx) {
     ctx.beginPath();
-    ctx.strokeStyle = "rgba(141, 248, 253)";
-    ctx.rect(25, 25, 120, 90);
-    ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
-    ctx.fillRect(25, 25, 120, 90);
-    ctx.stroke();
+      ctx.strokeStyle = "rgba(141, 248, 253)";
+      ctx.rect(25, 25, 120, 90);
+      ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
+      ctx.fillRect(25, 25, 120, 90);
+      ctx.stroke();
+    ctx.closePath();
 
     ctx.beginPath();
-    ctx.fillStyle = "white";
-    ctx.fillText("SCORE", 40, 65);
-    ctx.font = '24px "Audiowide"';
-    ctx.fill();
-
+      ctx.fillStyle = "white";
+      ctx.fillText("SCORE", 40, 65);
+      ctx.font = '20px "Audiowide"';
+      ctx.fill();
+    ctx.closePath();
+  
     ctx.beginPath();
-    ctx.fillStyle = "white";
-    ctx.fillText(this.score, 40, 90);
-    ctx.font = '24px "Audiowide"';
-    ctx.fill();
+      ctx.fillStyle = "white";
+      ctx.fillText(this.score, 40, 90);
+      ctx.font = '20px "Audiowide"';
+      ctx.fill();
+    ctx.closePath();
   }
 
-  animatePlayer() {
-    this.attack = false;
-  }
+  // animatePlayer() {
+  //   this.attack = false;
+  // }
 }
 
 export default Player;

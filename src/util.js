@@ -9,7 +9,7 @@ const Util = {
   },
   randomDY() {
     const dir = Math.random() < 0.5 ? 1 : -1;
-    const vel = Math.random() < 0.5 ? 2 : 4;
+    const vel = Math.random() < 0.5 ? 2 : 3;
     return dir * vel;
   }
 };

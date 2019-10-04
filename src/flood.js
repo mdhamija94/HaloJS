@@ -50,10 +50,10 @@ class Flood {
 
   drawWord(ctx) {
     ctx.beginPath();
-    ctx.fillStyle = "white";
-    ctx.fillText(this.word, this.x + 7.5, this.y - 10);
-    ctx.font = '20px "Audiowide"';
-    ctx.fill();
+      ctx.fillStyle = "white";
+      ctx.fillText(this.word, this.x + 7.5, this.y - 10);
+      ctx.fill();
+    ctx.closePath();
   }
 
   drawDead(ctx) {
@@ -69,7 +69,7 @@ class Flood {
 
   bindPath() {
     if (this.x <= 500) {
-      if (this.y < 165 || this.y > 450) {
+      if (this.y < 165 || this.y > 420) {
         this.dy *= -1;
       }
     }
