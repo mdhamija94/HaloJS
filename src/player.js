@@ -12,26 +12,20 @@ class Player {
     this.lifeIcon.src = "../public/images/player-lives.png";
   }
 
-  // draw(ctx) {
-  //   ctx.fillStyle = this.color;
-  //   ctx.arc(this.x, this.y, this.radius, 0, 2.0 * Math.PI);
-  //   ctx.fill();
-  // }
-
   draw(ctx) {
     if (this.attack) {
       ctx.drawImage(this.playerImg,
         512.5, 0,
         51.25, 73.25,
         800, 240,
-        84, 120
+        80.5, 115
       );
     } else {
       ctx.drawImage(this.playerImg, 
         564.75, 0,
         51.25, 73.25,
         800, 240,
-        84, 120
+        80.5, 115
       );
     }
   }
@@ -40,7 +34,7 @@ class Player {
     ctx.beginPath();
     ctx.strokeStyle = "rgba(141, 248, 253)";
     ctx.rect(390, 440, 270, 50);
-    ctx.fillStyle = "rgba(141, 248, 253, 0.3)";
+    ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
     ctx.fillRect(390, 440, 270, 50);
     ctx.stroke();
   }
@@ -49,7 +43,7 @@ class Player {
     ctx.beginPath();
     ctx.strokeStyle = "rgba(141, 248, 253)";
     ctx.rect(562.5, 25, 467.5, 90);
-    ctx.fillStyle = "rgba(141, 248, 253, 0.3)";
+    ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
     ctx.fillRect(562.5, 25, 467.5, 90);
     ctx.stroke();
 
@@ -66,22 +60,26 @@ class Player {
   drawScore(ctx) {
     ctx.beginPath();
     ctx.strokeStyle = "rgba(141, 248, 253)";
-    ctx.rect(25, 25, 130, 90);
-    ctx.fillStyle = "rgba(141, 248, 253, 0.3)";
-    ctx.fillRect(25, 25, 130, 90);
+    ctx.rect(25, 25, 120, 90);
+    ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
+    ctx.fillRect(25, 25, 120, 90);
     ctx.stroke();
 
     ctx.beginPath();
     ctx.fillStyle = "white";
-    ctx.fillText(this.score, 40, 85);
+    ctx.fillText("SCORE", 40, 65);
     ctx.font = '24px "Audiowide"';
     ctx.fill();
 
     ctx.beginPath();
     ctx.fillStyle = "white";
-    ctx.fillText("SCORE", 40, 60);
+    ctx.fillText(this.score, 40, 90);
     ctx.font = '24px "Audiowide"';
     ctx.fill();
+  }
+
+  animatePlayer() {
+    this.attack = false;
   }
 }
 

@@ -8,19 +8,23 @@ class Flood {
     this.alive = true;
     this.dx = 8;
     this.dy = Util.randomDY();
-    this.shiftSX = 648;
+    this.shift = 648;
     this.shiftSW = 60;
-    this.shiftDW = 110;
+    this.shiftDead = 865;
 
     this.floodImg = new Image();
     this.floodImg.src = "../public/images/Flood.png";
+    this.floodDetonateImg = new Image();
+    this.floodDetonateImg.src = "../public/images/flood-detonate.png"
+
+    this.detonateFlood = this.detonateFlood.bind(this);
   }
 
   draw(ctx) {
     // Frame 1
     if (this.alive) {
       ctx.drawImage(this.floodImg,
-        this.shiftSX, 826,
+        this.shift, 826,
         60, 46,
         this.x, this.y,
         104, 85
@@ -46,14 +50,21 @@ class Flood {
 
   drawWord(ctx) {
     ctx.beginPath();
-      ctx.fillStyle = "white";
-      ctx.fillText(this.word, this.x + 7.5, this.y - 10);
-      ctx.font = '20px "Audiowide"';
-      ctx.fill();
+    ctx.fillStyle = "white";
+    ctx.fillText(this.word, this.x + 7.5, this.y - 10);
+    ctx.font = '20px "Audiowide"';
+    ctx.fill();
   }
 
   drawDead(ctx) {
-
+    if (!this.alive) {
+      ctx.drawImage(this.floodDetonateImg,
+        this.shiftDead, 40,
+        35, 30,
+        this.x + 5, this.y + 15,
+        50, 50
+      );
+    }
   }
 
   bindPath() {
@@ -83,20 +94,35 @@ class Flood {
   }
 
   animateFlood() {
-    this.bindPath();
-    this.swarm();
-    this.x += this.dx;
-    this.y += this.dy;
+    if (this.alive) {
+      this.bindPath();
+      this.swarm();
+      this.x += this.dx;
+      this.y += this.dy;
 
-    if (this.shiftSX === 648) {
-      this.shiftSX = 710;
-    } else if (this.shiftSX === 710) {
-      this.shiftSX = 648;
+      if (this.shift === 648) {
+        this.shift = 710;
+        this.shiftSW = 74;
+      // } else if (this.shift === 785) {
+      //   this.shift = 710;
+      } else if (this.shift === 710) {
+        this.shift = 648;
+        this.shiftSW = 60;
+      }
     }
   }
 
   detonateFlood() {
+    if (!this.alive) {
+      this.word = "";
+      this.dx = 0;
+      this.dy = 0;
+      setTimeout(() => this.shiftDead += 40, 0);
 
+      if (this.shiftDead >= 1100) {
+        this.shiftDead = 1150;
+      }
+    }
   }
 }
 

@@ -51,7 +51,7 @@ class Dictionary {
       'junior', 'joke', 'keep', 'kitchen', 'kit', 'knock', 'kneel', 'knit', 'kid', 
       'kinship', 'knot', 'kick', 'kettle', 'know', 'king', 'key', 'knee', 'kill', 
       'loss', 'lean', 'lease', 'laser', 'letter', 'large', 'leaflet', 'layout', 
-      'licence', 'lace', 'load', 'launch', 'loan', 'low', 'leave', 'live', 
+      'license', 'lace', 'load', 'launch', 'loan', 'low', 'leave', 'live', 
       'ladder', 'liberty', 'leaf', 'lodge', 'left', 'leash', 'loose', 'lobby', 
       'last', 'limited', 'line', 'light', 'log', 'lid', 'leak', 'lie', 'list', 
       'learn', 'lemon', 'lonely', 'labour', 'long', 'laborer', 'literacy', 'margin', 

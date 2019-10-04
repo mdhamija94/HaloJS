@@ -10,7 +10,7 @@ class GameView {
   }
 
   animate() {
-    let fps = 8;
+    let fps = 12;
     let interval = 1000 / fps;
     let now = Date.now();
     let delta = now - this.then;
