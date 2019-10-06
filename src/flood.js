@@ -6,7 +6,7 @@ class Flood {
     this.y = options.y;
     this.word = options.word;
     this.alive = true;
-    this.dx = 8;
+    this.dx = 80;
     this.dy = Util.randomDY();
     this.shift = 648;
     this.shiftSW = 60;
@@ -89,7 +89,7 @@ class Flood {
     if (this.x >= 750) {
       this.dx = 0;
     } else if (this.x < 750 && this.alive) {
-      this.dx = 8;
+      this.dx = 80;
     }
   }
 

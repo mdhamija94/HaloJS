@@ -1,5 +1,6 @@
 import Game from './game';
 import GameView from './game_view';
+import StartScreen from './start_screen'
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("viewport");
@@ -7,12 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ctx = canvas.getContext("2d");
 
-  const game = new Game(ctx, input);
+  // const startScreen = new StartScreen(ctx);
+  // startScreen.drawTitle(250);
+
+  const game = new Game(ctx, canvas, input);
+  game.drawMenuBackground();
   
   new GameView(game, ctx).start();
-
-  // const playerImg = new Image();
-  // playerImg.src = "../public/images/MasterChief.png";
-
-  // this.ctx.drawImage()
 });
