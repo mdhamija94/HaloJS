@@ -50,8 +50,9 @@ class Flood {
 
   drawWord(ctx) {
     ctx.beginPath();
+      ctx.textAlign = "center";
       ctx.fillStyle = "white";
-      ctx.fillText(this.word, this.x + 7.5, this.y - 10);
+      ctx.fillText(this.word, this.x + 30, this.y - 10);
       ctx.fill();
     ctx.closePath();
   }

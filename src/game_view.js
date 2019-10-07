@@ -21,8 +21,6 @@ class GameView {
       this.then = now;
     }
 
-    this.game.input.addEventListener('keydown', this.game.handleInput);
-
     requestAnimationFrame(this.animate.bind(this));
   }
 }

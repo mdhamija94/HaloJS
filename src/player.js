@@ -1,5 +1,6 @@
 class Player {
-  constructor() {
+  constructor(ctx) {
+    this.ctx = ctx;
     this.lives = 5;
     this.lifeShift = 956.5;
     this.score = 0;
@@ -12,16 +13,16 @@ class Player {
     this.lifeIcon.src = "./public/images/player-lives.png";
   }
 
-  draw(ctx) {
+  draw() {
     if (this.attack) {
-      ctx.drawImage(this.playerImg,
+      this.ctx.drawImage(this.playerImg,
         512.5, 0,
         51.25, 73.25,
         800, 240,
         80.5, 115
       );
     } else {
-      ctx.drawImage(this.playerImg, 
+      this.ctx.drawImage(this.playerImg, 
         564.75, 0,
         51.25, 73.25,
         800, 240,
@@ -30,25 +31,25 @@ class Player {
     }
   }
 
-  drawInput(ctx) {
-    ctx.beginPath();
-    ctx.strokeStyle = "rgba(141, 248, 253)";
-    ctx.rect(390, 440, 270, 50);
-    ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
-    ctx.fillRect(390, 440, 270, 50);
-    ctx.stroke();
+  drawInput() {
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = "rgba(141, 248, 253)";
+    this.ctx.rect(390, 440, 270, 50);
+    this.ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
+    this.ctx.fillRect(390, 440, 270, 50);
+    this.ctx.stroke();
   }
 
-  drawLives(ctx) {
-    ctx.beginPath();
-    ctx.strokeStyle = "rgba(141, 248, 253)";
-    ctx.rect(562.5, 25, 467.5, 90);
-    ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
-    ctx.fillRect(562.5, 25, 467.5, 90);
-    ctx.stroke();
+  drawLives() {
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = "rgba(141, 248, 253)";
+    this.ctx.rect(562.5, 25, 467.5, 90);
+    this.ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
+    this.ctx.fillRect(562.5, 25, 467.5, 90);
+    this.ctx.stroke();
 
     for (let i = 0; i < this.lives; i++) {
-      ctx.drawImage(this.lifeIcon,
+      this.ctx.drawImage(this.lifeIcon,
         190, 40,
         535, 615,
         (this.lifeShift - (i * 93.5)), 40,
@@ -57,33 +58,31 @@ class Player {
     }
   }
 
-  drawScore(ctx) {
-    ctx.beginPath();
-      ctx.strokeStyle = "rgba(141, 248, 253)";
-      ctx.rect(25, 25, 120, 90);
-      ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
-      ctx.fillRect(25, 25, 120, 90);
-      ctx.stroke();
-    ctx.closePath();
+  drawScore() {
+    this.ctx.beginPath();
+      this.ctx.strokeStyle = "rgba(141, 248, 253)";
+      this.ctx.rect(25, 25, 120, 90);
+      this.ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
+      this.ctx.fillRect(25, 25, 120, 90);
+      this.ctx.stroke();
+    this.ctx.closePath();
 
-    ctx.beginPath();
-      ctx.fillStyle = "white";
-      ctx.fillText("SCORE", 40, 65);
-      ctx.font = '20px "Audiowide"';
-      ctx.fill();
-    ctx.closePath();
+    this.ctx.beginPath();
+      this.ctx.textAlign = "center";
+      this.ctx.font = '20px "Audiowide"';
+      this.ctx.fillStyle = "white";
+      this.ctx.fillText("SCORE", 82.5, 65);
+      this.ctx.fill();
+    this.ctx.closePath();
   
-    ctx.beginPath();
-      ctx.fillStyle = "white";
-      ctx.fillText(this.score, 40, 90);
-      ctx.font = '20px "Audiowide"';
-      ctx.fill();
-    ctx.closePath();
+    this.ctx.beginPath();
+      this.ctx.textAlign = "center";
+      this.ctx.font = '20px "Audiowide"';
+      this.ctx.fillStyle = "white";
+      this.ctx.fillText(this.score, 82.5, 90);
+      this.ctx.fill();
+    this.ctx.closePath();
   }
-
-  // animatePlayer() {
-  //   this.attack = false;
-  // }
 }
 
 export default Player;
