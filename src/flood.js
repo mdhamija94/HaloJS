@@ -6,16 +6,16 @@ class Flood {
     this.y = options.y;
     this.word = options.word;
     this.alive = true;
-    this.dx = 80;
+    this.dx = 8;
     this.dy = Util.randomDY();
     this.shift = 648;
     this.shiftSW = 60;
     this.shiftDead = 865;
 
     this.floodImg = new Image();
-    this.floodImg.src = "../public/images/Flood.png";
+    this.floodImg.src = "./public/images/Flood.png";
     this.floodDetonateImg = new Image();
-    this.floodDetonateImg.src = "../public/images/flood-detonate.png"
+    this.floodDetonateImg.src = "./public/images/flood-detonate.png"
 
     this.detonateFlood = this.detonateFlood.bind(this);
   }
@@ -89,7 +89,7 @@ class Flood {
     if (this.x >= 750) {
       this.dx = 0;
     } else if (this.x < 750 && this.alive) {
-      this.dx = 80;
+      this.dx = 8;
     }
   }
 

@@ -6,10 +6,10 @@ class Player {
     this.attack = false;
 
     this.playerImg = new Image();
-    this.playerImg.src = "../public/images/MasterChief.png";
+    this.playerImg.src = "./public/images/MasterChief.png";
 
     this.lifeIcon = new Image();
-    this.lifeIcon.src = "../public/images/player-lives.png";
+    this.lifeIcon.src = "./public/images/player-lives.png";
   }
 
   draw(ctx) {

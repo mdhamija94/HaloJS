@@ -48,8 +48,6 @@ body {
 
 #viewport {
   background: url("../images/game-background.png");
-  /* background: white;
-  opacity: 0.5; */
   background-size: cover;
 }
 
@@ -57,8 +55,6 @@ body {
   position: absolute;
   bottom: 25px;
   left: 390px;
-  /* background-color: rgba(141, 248, 253, 0.3); */
-  /* border: 1px solid rgba(141, 248, 253); */
   padding: 10px;
   border-radius: 10px;
   text-align: center;

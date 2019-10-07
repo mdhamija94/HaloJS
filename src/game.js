@@ -10,6 +10,7 @@ class Game {
     this.input = input;
     this.dictionary = new Dictionary();
     this.player = new Player();
+    this.alive = true;
     // this.round = 1;
     this.spawnGap = 2750;
     this.killCount = 0;
@@ -91,6 +92,10 @@ class Game {
     if (e.keyCode === 9) {
       this.resetGame();
     }
+
+    if (e.keyCode === 20) {
+      this.alive = false;
+    }
   }
 
   handleDamage() {
@@ -106,6 +111,9 @@ class Game {
     });
 
     this.player.lives = (5 - (reachedPlayer.length));
+    if (this.player.lives === 0) {
+      this.alive = false;
+    }
   }
 
   gameOver() {
@@ -113,10 +121,27 @@ class Game {
     this.drawMenuBackground();
     this.input.value = "";
     this.input.disabled = true;
+
+    this.ctx.textAlign = "center";
+    this.ctx.fillStyle = "white";
+    this.ctx.font = '72px "Audiowide"';
+    this.ctx.fillText("Game Over", (this.canvas.width / 2), 225);
+
+    this.ctx.textAlign = "center";
+    this.ctx.fillStyle = "white";
+    this.ctx.font = '36px "Audiowide"';
+    this.ctx.fillText(this.player.score, (this.canvas.width / 2), 287.5);
+
+    this.ctx.textAlign = "center";
+    this.ctx.fillStyle = "white";
+    this.ctx.font = '36px "Audiowide"';
+    this.ctx.fillText("Kills", (this.canvas.width / 2), 350);
+
+
   }
 
   draw(ctx) {
-    if (this.player.lives > 0) {
+    if (this.alive) {
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.player.draw(ctx);
       this.player.drawScore(ctx);
@@ -132,7 +157,7 @@ class Game {
       this.player.attack = false;
     } 
     
-    if (this.player.lives <= 0) {
+    if (!this.alive) {
       this.gameOver();
     }
   }
