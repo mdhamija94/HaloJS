@@ -5,21 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>HaloJS</title>
+  <link href="https://fonts.googleapis.com/css?family=Audiowide|Libre+Baskerville|Press+Start+2P&display=swap"
+    rel="stylesheet">
   <script src="./dist/main.js"></script>
   <link rel="stylesheet" type="text/css" href="./public/css/canvas.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css"
     integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Audiowide|Libre+Baskerville|Press+Start+2P&display=swap"
-    rel="stylesheet">
 </head>
 <body id="body">
   <header class="title-container">
-    <strong class="dot-js">.JS</strong>
+    <div class="dot-js">.JS</div>
     <div class="subtitle">Typing Evolved</div>
   </header>
   <div class="viewport-container">
     <canvas id="viewport" width="1050" height="515"></canvas>
     <input type="text" id="typebox" disabled autofocus>
+    <div id="start-screen-container">
+      <div id="start-screen-title">
+        Fight the Flood...
+      </div>
+      <div class="instructions">
+        Type the words that appear above the enemies before they reach Master Chief
+      </div>
+      <div class="instructions">
+        As the flood draws near, tap or hold 'Enter' to fire your weapon to push the horde back
+      </div>
+      <div id="cta">
+        Press Spacebar to Start
+      </div>
+    </div>
+    <div id="creator-tag">
+      Created by Mohit Dhamija
+    </div>
   </div>
   <footer class="footer-container">
     <ul class="footer-list">

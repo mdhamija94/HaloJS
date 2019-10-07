@@ -25,12 +25,6 @@ class Game {
     this.gameOver = this.gameOver.bind(this);
   }
 
-  drawMenuBackground() {
-      this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
-      this.ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-
   startGame(e) {
     if (e.keyCode === 32) {
       this.body.removeEventListener('keydown', this.startGame);
@@ -39,8 +33,135 @@ class Game {
     }
   }
 
-  startScreen() {
+  resetGame() {
+    this.alive = true;
+    this.flood = [];
+    this.killCount = 0;
+    this.spawnGap = 2750;
+    this.input.disabled = false;
+    this.input.value = "";
+    this.input.focus();
+    this.player.lives = 5;
+    this.player.score = 0;
+    clearInterval(this.interval);
+    this.interval = setInterval(() => this.spawnFlood(), 3000);
+  }
+
+  spawnFlood() {
+    const num = (this.killCount % 2 === 0) ? 1 : 2;
+
+    for (let i = 0; i < num; i++) {
+      this.floodFactory();
+    }
+  }
+
+  floodFactory() {
+    let floodObj = new Flood({
+      x: -100,
+      y: Util.randomY(),
+      word: this.dictionary.randomWord()
+    });
+
+    this.flood.push(floodObj);
+  }
+
+  handleInput(e) {
+    if (e.keyCode === 13) {
+      this.player.attack = !this.player.attack;
+
+      let value = this.input.value.toLowerCase().trim();
+
+      this.flood.forEach(floodObj => {
+        if (floodObj.y > 250 && floodObj.y < 270 && floodObj.alive) {
+          floodObj.x -= 15;
+          floodObj.y += Util.randomDY();
+        }
+
+        if (value === floodObj.word && value !== "") {
+          this.player.score += (floodObj.word.length * 10);
+          floodObj.alive = false;
+          this.killCount += 1;
+          this.increaseSpeed();
+        }
+      });
+
+      this.input.value = "";
+    }
+
+    if (e.keyCode === 20) {
+      this.alive = false;
+    }
+  }
+
+  increaseSpeed() {
+    if (this.killCount % 5 === 0 && this.spawnGap > 750) {
+      clearInterval(this.interval);
+      this.interval = setInterval(() => this.spawnFlood(), this.spawnGap);
+      this.spawnGap -= 250;
+    }
+  }
+
+  handleDamage() {
+    let reachedPlayer = [];
+
+    this.flood.forEach(floodObj => {
+      if (floodObj.x > 745 && floodObj.y > 250 && floodObj.y < 270) {
+        floodObj.alive = false;
+        if (!reachedPlayer.includes(floodObj)) {
+          reachedPlayer.push(floodObj);
+        }
+      }
+    });
+
+    this.player.lives = (5 - (reachedPlayer.length));
+
+    if (this.player.lives <= 0) {
+      this.alive = false;
+    }
+  }
+
+  draw(ctx) {
+    if (this.alive) {
+      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.player.draw(ctx);
+      this.player.drawScore(ctx);
+      this.player.drawLives(ctx);
+
+      this.flood.forEach(object => {
+        object.draw(ctx);
+        object.drawDead(ctx);
+        object.drawWord(ctx);
+      });
+
+      this.player.drawInput(ctx);
+      this.player.attack = false;
+    }
+
+    if (!this.alive) {
+      this.gameOver();
+    }
+  }
+
+  animateEnemies() {
+    this.flood.forEach(object => {
+      object.animateFlood();
+      object.detonateFlood();
+    });
+  }
+
+  step() {
+    this.animateEnemies();
+    this.handleDamage();
+  }
+
+  drawMenuBackground() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  startScreen() {
     this.drawMenuBackground();
 
     // this.ctx.textAlign = "center";
@@ -72,87 +193,7 @@ class Game {
     this.ctx.fillText("As the flood draws near, tap or hold 'Enter' to push the horde back to buy time", (this.canvas.width / 2), 285);
   }
 
-  resetGame() {
-    this.alive = true;
-    this.flood = [];
-    this.killCount = 0;
-    this.spawnGap = 2750;
-    this.input.disabled = false;
-    this.input.value = "";
-    this.input.focus();
-    this.player.lives = 5;
-    this.player.score = 0;
-    clearInterval(this.interval);
-    this.interval = setInterval(() => this.spawnFlood(), 3000);
-  }
-
-  floodFactory() {
-    let floodObj = new Flood({
-      x: -100,
-      y: Util.randomY(),
-      word: this.dictionary.randomWord()
-    });
-    
-    this.flood.push(floodObj);
-  }
-  
-  spawnFlood() {
-    const num = (this.killCount % 2 === 0) ? 1 : 2;
-    
-    for (let i = 0; i < num; i++) {
-      this.floodFactory();
-    }
-  }
-
-  handleInput(e) {  
-    if (e.keyCode === 13) {
-      this.player.attack = !this.player.attack;
-
-      let value = this.input.value.toLowerCase().trim();
-
-      this.flood.forEach(floodObj => {
-        if (floodObj.y > 250 && floodObj.y < 270 && floodObj.alive) {
-          floodObj.x -= 15;
-          floodObj.y += Util.randomDY();
-        }
-        
-        if (value === floodObj.word && value !== "") {
-          this.player.score += (floodObj.word.length * 10);
-          floodObj.alive = false;
-          this.killCount += 1;
-          this.increaseSpeed();
-        }
-      });
-      
-      this.input.value = "";
-    }
-
-    if (e.keyCode === 20) {
-      this.alive = false;
-    }
-  }
-
-  handleDamage() {
-    let reachedPlayer = [];
-
-    this.flood.forEach(floodObj => {
-      if (floodObj.x > 745 && floodObj.y > 250 && floodObj.y < 270) {
-        floodObj.alive = false;
-        if (!reachedPlayer.includes(floodObj)) {
-          reachedPlayer.push(floodObj);
-        }
-      }
-    });
-
-    this.player.lives = (5 - (reachedPlayer.length));
-
-    if (this.player.lives <= 0) {
-      this.alive = false;
-    }
-  }
-
   gameOver() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawMenuBackground();
     this.input.value = "";
     this.input.disabled = true;
@@ -173,49 +214,6 @@ class Game {
     this.ctx.fillText("Press Spacebar to Restart", (this.canvas.width / 2), 400);
     
     this.body.addEventListener('keydown', this.startGame);
-  }
-
-  draw(ctx) {
-    if (this.alive) {
-      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.player.draw(ctx);
-      this.player.drawScore(ctx);
-      this.player.drawLives(ctx);
-
-      this.flood.forEach(object => {
-        object.draw(ctx);
-        object.drawDead(ctx);
-        object.drawWord(ctx);
-      });
-
-      this.player.drawInput(ctx);
-      this.player.attack = false;
-    } 
-    
-    if (!this.alive) {
-      this.gameOver();
-    }
-  }
-
-  moveFlood() {
-    this.flood.forEach(object => {
-      object.animateFlood();
-      object.detonateFlood();
-    });
-  }
-
-  increaseSpeed() {
-    if (this.killCount % 5 === 0 && this.spawnGap > 750) {
-      clearInterval(this.interval);
-      this.interval = setInterval(() => this.spawnFlood(), this.spawnGap);
-      this.spawnGap -= 250;
-    }
-  }
-
-  step() {
-    this.moveFlood();
-    this.handleDamage();
-    this.drawMenuBackground();
   }
 }
 

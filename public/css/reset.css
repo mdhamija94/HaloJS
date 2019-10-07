@@ -25,21 +25,6 @@ img {
   height: auto;
 }
 
-input[type="password"],
-input[type="email"],
-input[type="text"],
-input[type="submit"],
-textarea,
-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-input[type="submit"] {
-  cursor: pointer;
-}
-
 /* Clearfix */
 
 .group:after {
