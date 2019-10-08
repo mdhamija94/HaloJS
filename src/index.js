@@ -1,6 +1,5 @@
 import Game from './game';
 import GameView from './game_view';
-// import StartScreen from './start_screen';
 
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.getElementById("body");

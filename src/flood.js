@@ -15,13 +15,18 @@ class Flood {
     this.floodImg = new Image();
     this.floodImg.src = "./public/images/Flood.png";
     this.floodDetonateImg = new Image();
-    this.floodDetonateImg.src = "./public/images/flood-detonate.png"
+    this.floodDetonateImg.src = "./public/images/flood-detonate.png";
 
     this.detonateFlood = this.detonateFlood.bind(this);
   }
 
+  drawWord(ctx) {
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    ctx.fillText(this.word, this.x + 30, this.y - 10);
+  }
+
   draw(ctx) {
-    // Frame 1
     if (this.alive) {
       ctx.drawImage(this.floodImg,
         this.shift, 826,
@@ -30,31 +35,6 @@ class Flood {
         104, 85
       );
     }
-
-    // Frame 2
-    // ctx.drawImage(this.floodImg,
-    //   710, 826,
-    //   74, 46,
-    //   this.x, this.y,
-    //   125, 90
-    // )
-
-    // Frame 3
-    // ctx.drawImage(this.floodImg,
-    //   785, 826,
-    //   74, 46,
-    //   this.x, this.y,
-    //   140, 90
-    // )
-  }
-
-  drawWord(ctx) {
-    ctx.beginPath();
-      ctx.textAlign = "center";
-      ctx.fillStyle = "white";
-      ctx.fillText(this.word, this.x + 30, this.y - 10);
-      ctx.fill();
-    ctx.closePath();
   }
 
   drawDead(ctx) {
@@ -68,11 +48,26 @@ class Flood {
     }
   }
 
+  animateFlood() {
+    if (this.alive) {
+      this.bindPath();
+      this.swarm();
+      this.x += this.dx;
+      this.y += this.dy;
+
+      if (this.shift === 648) {
+        this.shift = 710;
+        this.shiftSW = 74;
+      } else if (this.shift === 710) {
+        this.shift = 648;
+        this.shiftSW = 60;
+      }
+    }
+  }
+
   bindPath() {
     if (this.x <= 500) {
-      if (this.y < 165 || this.y > 420) {
-        this.dy *= -1;
-      }
+      if (this.y < 165 || this.y > 420) this.dy *= -1;
     }
   }
 
@@ -94,35 +89,15 @@ class Flood {
     }
   }
 
-  animateFlood() {
-    if (this.alive) {
-      this.bindPath();
-      this.swarm();
-      this.x += this.dx;
-      this.y += this.dy;
-
-      if (this.shift === 648) {
-        this.shift = 710;
-        this.shiftSW = 74;
-      // } else if (this.shift === 785) {
-      //   this.shift = 710;
-      } else if (this.shift === 710) {
-        this.shift = 648;
-        this.shiftSW = 60;
-      }
-    }
-  }
-
   detonateFlood() {
     if (!this.alive) {
       this.word = "";
       this.dx = 0;
       this.dy = 0;
+
       setTimeout(() => this.shiftDead += 40, 0);
 
-      if (this.shiftDead >= 1100) {
-        this.shiftDead = 1150;
-      }
+      if (this.shiftDead >= 1100) this.shiftDead = 1150;
     }
   }
 }

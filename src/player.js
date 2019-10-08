@@ -2,9 +2,9 @@ class Player {
   constructor(ctx) {
     this.ctx = ctx;
     this.lives = 5;
-    this.lifeShift = 956.5;
     this.score = 0;
     this.attack = false;
+    this.lifeShift = 956.5;
 
     this.playerImg = new Image();
     this.playerImg.src = "./public/images/MasterChief.png";
@@ -59,29 +59,17 @@ class Player {
   }
 
   drawScore() {
-    this.ctx.beginPath();
-      this.ctx.strokeStyle = "rgba(141, 248, 253)";
-      this.ctx.rect(25, 25, 120, 90);
-      this.ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
-      this.ctx.fillRect(25, 25, 120, 90);
-      this.ctx.stroke();
-    this.ctx.closePath();
+    this.ctx.strokeStyle = "rgba(141, 248, 253)";
+    this.ctx.rect(25, 25, 120, 90);
+    this.ctx.fillStyle = "rgba(141, 248, 253, 0.25)";
+    this.ctx.fillRect(25, 25, 120, 90);
+    this.ctx.stroke();
 
-    this.ctx.beginPath();
-      this.ctx.textAlign = "center";
-      this.ctx.font = '20px "Audiowide"';
-      this.ctx.fillStyle = "white";
-      this.ctx.fillText("SCORE", 82.5, 65);
-      this.ctx.fill();
-    this.ctx.closePath();
-  
-    this.ctx.beginPath();
-      this.ctx.textAlign = "center";
-      this.ctx.font = '20px "Audiowide"';
-      this.ctx.fillStyle = "white";
-      this.ctx.fillText(this.score, 82.5, 90);
-      this.ctx.fill();
-    this.ctx.closePath();
+    this.ctx.textAlign = "center";
+    this.ctx.font = '20px "Audiowide"';
+    this.ctx.fillStyle = "white";
+    this.ctx.fillText("SCORE", 82.5, 65);
+    this.ctx.fillText(this.score, 82.5, 90);
   }
 }
 

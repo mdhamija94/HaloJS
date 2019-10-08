@@ -12,7 +12,7 @@ class Game {
     this.dictionary = new Dictionary();
     this.player = new Player(ctx);
     this.flood = [];
-    this.alive = true;
+    this.gameOver = false;
     this.killCount = 0;
     this.spawnGap = 2750;
     this.interval = setInterval(() => this.spawnFlood(), 3000);
@@ -22,7 +22,7 @@ class Game {
     this.drawMenuBackground = this.drawMenuBackground.bind(this);
     this.startGame = this.startGame.bind(this);
     this.resetGame = this.resetGame.bind(this);
-    this.gameOver = this.gameOver.bind(this);
+    this.gameOverScreen = this.gameOverScreen.bind(this);
   }
 
   startGame(e) {
@@ -34,7 +34,7 @@ class Game {
   }
 
   resetGame() {
-    this.alive = true;
+    this.gameOver = false;
     this.flood = [];
     this.killCount = 0;
     this.spawnGap = 2750;
@@ -78,18 +78,14 @@ class Game {
         }
 
         if (value === floodObj.word && value !== "") {
+          this.killCount += 1;
           this.player.score += (floodObj.word.length * 10);
           floodObj.alive = false;
-          this.killCount += 1;
           this.increaseSpeed();
         }
       });
 
       this.input.value = "";
-    }
-
-    if (e.keyCode === 20) {
-      this.alive = false;
     }
   }
 
@@ -116,12 +112,14 @@ class Game {
     this.player.lives = (5 - (reachedPlayer.length));
 
     if (this.player.lives <= 0) {
-      this.alive = false;
+      this.gameOver = true;
     }
   }
 
   draw(ctx) {
-    if (this.alive) {
+    if (this.gameOver) this.gameOverScreen();
+
+    if (!this.gameOver) {
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.player.draw(ctx);
       this.player.drawScore(ctx);
@@ -135,10 +133,6 @@ class Game {
 
       this.player.drawInput(ctx);
       this.player.attack = false;
-    }
-
-    if (!this.alive) {
-      this.gameOver();
     }
   }
 
@@ -161,46 +155,14 @@ class Game {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  startScreen() {
-    this.drawMenuBackground();
-
-    // this.ctx.textAlign = "center";
-    // this.ctx.fillStyle = "white";
-    // this.ctx.font = '72px "Audiowide"';
-    // this.ctx.fillText("Game Over", (this.canvas.width / 2), 175);
-
-    // this.ctx.textAlign = "center";
-    // this.ctx.fillStyle = "rgba(141, 248, 253)";
-    // this.ctx.font = '36px "Audiowide"';
-    // this.ctx.fillText(this.killCount, 395, 260);
-    // this.ctx.fillText("Kills", 395, 310);
-    // this.ctx.fillText(this.player.score, 657.5, 260);
-    // this.ctx.fillText("Points", 657.5, 310);
-
-    // this.ctx.fillStyle = "white";
-    // this.ctx.fillText("Press Spacebar to Restart", (this.canvas.width / 2), 400);
-
-    this.ctx.textAlign = "center";
-    this.ctx.fillStyle = "white";
-    this.ctx.font = '36px Audiowide';
-    this.ctx.fillText("Fight the Flood...", (this.canvas.width / 2), 175);
-    this.ctx.fillText("Press Enter to Start", (this.canvas.width / 2), 375);
-
-    // this.ctx.textAlign = "center";
-    // this.ctx.fillStyle = "white";
-    this.ctx.font = '20px Audiowide';
-    this.ctx.fillText("Type the words that appear above the enemies before they reach the player", (this.canvas.width / 2), 250);
-    this.ctx.fillText("As the flood draws near, tap or hold 'Enter' to push the horde back to buy time", (this.canvas.width / 2), 285);
-  }
-
-  gameOver() {
+  gameOverScreen() {
     this.drawMenuBackground();
     this.input.value = "";
     this.input.disabled = true;
 
     this.ctx.textAlign = "center";
     this.ctx.fillStyle = "white";
-    this.ctx.font = '72px Audiowide';
+    this.ctx.font = '60px Audiowide';
     this.ctx.fillText("Game Over", (this.canvas.width / 2), 175);
 
     this.ctx.fillStyle = "rgba(141, 248, 253)";
