@@ -13,7 +13,7 @@ class Flood {
     this.shiftDead = 865;
 
     this.floodImg = new Image();
-    this.floodImg.src = "./public/images/Flood.png";
+    this.floodImg.src = "./public/images/flood.png";
     this.floodDetonateImg = new Image();
     this.floodDetonateImg.src = "./public/images/flood-detonate.png";
 
