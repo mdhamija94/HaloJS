@@ -1,6 +1,6 @@
 # HaloJS
 
-HaloJS is a simple type-to-shoot game styled after the classic Halo series.
+HaloJS is a simple type-to-shoot game styled after Bungie's classic, Halo.
 
 [Play HaloJS](https://mdhamija94.github.io/HaloJS/)
 
